@@ -8,6 +8,7 @@
 
 <script lang="babel">
   import slotMixin from '@/mixins/slot';
+  import ConfiguratorContainer from '@/components/ConfiguratorContainer';
 
   export default {
     name: 'panel',
@@ -32,6 +33,9 @@
 
         return classNames;
       },
+    },
+    components: {
+      ConfiguratorContainer,
     },
   };
 </script>

@@ -2,6 +2,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import * as actionTypes from './action-types';
+import * as mutationTypes from './mutation-types';
+
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
@@ -103,9 +106,27 @@ const store = new Vuex.Store({
       ]
     },
   },
-  actions: {},
-  mutations: {},
-  getters: {},
+  actions: {
+    [actionTypes.SET_OPTION]({ commit }, selectedOption) {
+      commit(mutationTypes.SET_OPTION_MUTATION, selectedOption);
+    },
+  },
+  mutations: {
+    [mutationTypes.SET_OPTION_MUTATION](state, selectedOption) {
+      const selected = state.items.find(x => x.option === selectedOption.option);
+      selected.value = selectedOption.value;
+    },
+  },
+  getters: {
+    items: (state) => {
+      const actualState = state;
+      return actualState.items;
+    },
+    options: (state) => (option) => {
+      const actualState = state;
+      return actualState.options[option];
+    },
+  },
 });
 
 export default store;
